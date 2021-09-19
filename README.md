@@ -47,6 +47,7 @@
         ```
     + Act.6 실행하기
         + 아무런 변화가 없다
+        
             ![image](https://user-images.githubusercontent.com/79895970/133917132-da7e59c7-178a-447e-9f0e-88f695305fe2.png)
         + 이는 Food컴포넌트에 props를 전달 했을 뿐 아직 사용하지 않았기 때문이다.
     + Act.7 props사용하기
@@ -65,6 +66,7 @@
                 <Food fav="kimchi" />
             ```
         + 결과값을 확인해본다.
+
             ![image](https://user-images.githubusercontent.com/79895970/133917589-90470bbc-8c9f-4a18-b78c-5e25edb2be21.png)
     + Act.10 ‘props.fav’ 를 중괄호로 감싸서 return값에 적용해 보자.
         + 객체의 특정 값을 사용할 때는 점(.)연산자를 사용한다.
@@ -74,6 +76,7 @@
                 }
             ```
         + 결과값 확인
+
             ![image](https://user-images.githubusercontent.com/79895970/133917664-d72328f7-2cd8-474a-882e-a099cbeb3bc6.png)
         + 구조 분해 할당으로 props사용하기
             + 아래 코드와 같이 수정하여 사용하자.
@@ -99,6 +102,7 @@
                   );
                 }
             ```
+
                 ![image](https://user-images.githubusercontent.com/79895970/133917856-5649471c-f15a-4709-84b4-1f5e99d6c95d.png)
 2. 비슷한 컴포넌트 여러개 만들기
     + Act.1 앞에서 만든 컴포넌트 형태 다시 살펴보기
@@ -140,6 +144,7 @@
                 const friends = ["dal","mark","lynn","japan guy"]
             ```
         + 배열의 이름을 입력하여 결과를 확인해보자
+
             ![image](https://user-images.githubusercontent.com/79895970/133918307-1f7decc5-fed4-4dfd-ad1f-f72167a800c2.png)
         + Act.2 map 함수를 사용해보자
             + 아래 코드를 입력하고 결과를 확인
@@ -149,6 +154,7 @@
                       return 0;
                     })
                 ```
+
                     ![image](https://user-images.githubusercontent.com/79895970/133918374-a2c818de-4f60-48d6-bb6b-818253577174.png)
         + Act.3 map() 함수로 이름에 하트 추가한 배열 만들기.
             + 아래 코드를 입력하기
@@ -158,6 +164,7 @@
                     })
                 ```
             + 결과를 확인해보자.
+
                 ![image](https://user-images.githubusercontent.com/79895970/133918542-15d426ef-7b93-4c49-86e7-fcfd2887d5ef.png)
 ## [ 09월 08일 ]
  > + 리액트로 클론 코딩 시작 하기
