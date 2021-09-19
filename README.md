@@ -1,5 +1,164 @@
 # 인병민 201840225
 
+## [ 09월 15일 ]
+ > + Props
+ > + 비슷한 컴포넌트 여러개 만들기
+ > + map
+### 학습내용
+1. props
+    + Props란 컴포넌트에서 컴포넌트로 전달하느 데이터를 말한ㄷ. 함수의 매개변수 역할을 하는것이다. 따라서 props를 사용하면 컴포넌트를 효율적으로 사용할수 있다.
+    + Act.1 컴포넌트 여러개 사용해보기
+        + potato 컴포넌트를 Movie 컴포넌트로 수정하기
+            ```
+                fuction Movie() {
+                    return <h1>I like potato</h1>
+                }
+            ```
+    + Act.2 Movie 컴포넌트를 20개 복사하여 붙여넣기
+        ```
+            <div>
+                <h1>Hello</h1>
+                <Movie />
+                <!-- Movie 컴포넌트 입력 생략 -->
+                <Movie />
+            </div>
+        ```
+    + Act.3 props로 컴포넌트에 데이터 전달하기
+        + Movie 컴포넌트의 이름을 Food로 수정 그리고 Movie 컴포넌트를 전부 삭제해준다.
+            ```
+                function Food() {
+                return <h1>I like potato</h1>
+                }
+            ```
+    + Act.4 <Food /> 를 <Food fav="kimchi" />로 수정해본다.
+        ```
+            function App() {
+              return (
+                <div >
+                  <h1>Hello</h1>
+                  <Food fav="kimchi" />
+                </div>
+              );
+            }
+        ```
+    + Act.5 Food 컴포넌트에 props전달하기.
+        ```
+            <Food fav="kimchi" something={true} papapapa={['hello',1,2,3,4,true]} />
+        ```
+    + Act.6 실행하기
+        + 아무런 변화가 없다
+            ![image](https://user-images.githubusercontent.com/79895970/133917132-da7e59c7-178a-447e-9f0e-88f695305fe2.png)
+        + 이는 Food컴포넌트에 props를 전달 했을 뿐 아직 사용하지 않았기 때문이다.
+    + Act.7 props사용하기
+        ```
+            function Food(props) {
+            console.log(props);
+            return <h1>I like potato</h1>;
+            }
+        ```
+    + Act.8 개발자 도구를 실행해서 Console탭을 열어보자.
+        + Food컴포넌트에 전달한 props를 속성으로 하는 객체(Object)가 출력된 것을 확인할 수 있다.
+            ![image](https://user-images.githubusercontent.com/79895970/133917545-f53d44df-7043-40f6-9461-dab249dbde86.png)
+    + Act.9 props 다시 한 번 사용하기.
+        + 코드에서 props전달 값 중에서 kimchi만 놔두고 모두 삭제한다.
+            ```
+                <Food fav="kimchi" />
+            ```
+        + 결과값을 확인해본다.
+            ![image](https://user-images.githubusercontent.com/79895970/133917589-90470bbc-8c9f-4a18-b78c-5e25edb2be21.png)
+    + Act.10 ‘props.fav’ 를 중괄호로 감싸서 return값에 적용해 보자.
+        + 객체의 특정 값을 사용할 때는 점(.)연산자를 사용한다.
+            ```
+                function Food(props) {
+                return <h1>I like {props.fav}</h1>;
+                }
+            ```
+        + 결과값 확인
+            ![image](https://user-images.githubusercontent.com/79895970/133917664-d72328f7-2cd8-474a-882e-a099cbeb3bc6.png)
+        + 구조 분해 할당으로 props사용하기
+            + 아래 코드와 같이 수정하여 사용하자.
+                ```
+                    function Food(props) {
+                    const { fav } = props
+                    return <h1>I like {fav}</h1>;
+                    }
+                ```
+            + 데이터의 개수가 많아지면 구조 분할 할당을 사용하는 것이 편리하다.
+    + Act.11 여러 개의 컴포넌트에 props사용하기
+        + 앞서서 살펴본 구조 분해 할당을 사용하여 코드를 수정해 보자.
+            ```
+                function App() {
+                  return (
+                    <div >
+                      <h1>Hello</h1>
+                      <Food fav="kimchi" />
+                      <Food fav="ramen" />
+                      <Food fav="samgiopsal" />
+                      <Food fav="chukumi" />
+                    </div>
+                  );
+                }
+            ```
+                ![image](https://user-images.githubusercontent.com/79895970/133917856-5649471c-f15a-4709-84b4-1f5e99d6c95d.png)
+2. 비슷한 컴포넌트 여러개 만들기
+    + Act.1 앞에서 만든 컴포넌트 형태 다시 살펴보기
+        + 3장에서 작성한 App.js파일을 다시 열어 코드가 효율적인지 살펴본다.
+    + Act.2 음식 데이터 만들기
+        + 서버에서 넘어온 데이터를 저장할 수 있도록 foodILike라는 변수를 만든 다음 빈 배열을 할당한다.
+            ```
+               const foodIlike = [] 
+            ```
+        + 비효율적으로 작성된 Food 컴포넌트는 모두 삭제한다.
+            ```
+                function App() {
+                  return (
+                    <div >
+                        <h1>Hello</h1>
+                    </div>
+                  );
+                }
+            ```
+    + Act.3 서버에서 데이터가 넘어온다고 가정하고 다음과 같이 코드를 작성해 본다
+        ```
+              {
+                  name: "chicken",
+                  image: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fw.namu.            la%2Fs%2F0757e0521734bb19004e9c35b3d64e26509edd9480b184cdc591364f7d336c01294622cc7c3ec3a1cf95caf9d177e1abb2039b315958a3989b168e6            37497fb54ac296cab8950f3f81720029a246ced799154d29b3619401c53acbcba57fb0b38&imgrefurl=https%3A%2F%2Fnamu.         wiki%2Fw%2F%25EC%25B9%2598%25ED%2582%25A8&tbnid=mj69TAhEXsVw8M&vet=12ahUKEwic7uOnooDzAhXGBKYKHdvcAAoQMygAegUIARDKAQ..i&               docid=O0MPjaXMA5iTmM&w=900&h=682&q=%EC%B9%98%ED%82%A8&ved=2ahUKEwic7uOnooDzAhXGBKYKHdvcAAoQMygAegUIARDKAQ"
+                },
+                {
+                  name: "pizza",
+                  image: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fw.namu.            la%2Fs%2F8c2aebf04d4c6e0ae24ebf3b3789cb064f353da40f0a2916630ee33cc34742414ac8427b8765569e84d615a24cac7bc389ada2e5c60579541ea8b41            be9b22db6d0ce58f59fd1ac01912436c928605cd86974e360258a66ac0374662e70b0ae73&imgrefurl=https%3A%2F%2Fnamu.         wiki%2Fw%2F%25ED%2594%25BC%25EC%259E%2590&tbnid=Buf3KFfT8a1WsM&vet=12ahUKEwjU6qm8ooDzAhXBwYsBHWopBp0QMygAegUIARDNAQ..i&               docid=P_CrebuGKrkEtM&w=640&h=420&q=%ED%94%BC%EC%9E%90&ved=2ahUKEwjU6qm8ooDzAhXBwYsBHWopBp0QMygAegUIARDNAQ"
+                },
+                {
+                  name: "hamburger",
+                  image: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.              org%2Fwikipedia%2Fcommons%2Fthumb%2F0%2F0b%2FRedDot_Burger.jpg%2F1200px-RedDot_Burger.jpg&imgrefurl=https%3A%2F%2Fen.wikipedia.         org%2Fwiki%2FHamburger&tbnid=VqOMCypKINfRNM&vet=12ahUKEwjZoKrHooDzAhUENqYKHRpkCmoQMygAegUIARDOAQ..i&docid=16_CswVDw3XSKM&w=1200&        h=800&itg=1&q=hamburger&ved=2ahUKEwjZoKrHooDzAhUENqYKHRpkCmoQMygAegUIARDOAQ"
+                }
+        ```
+3. map()함수
+    + map 함수 사용법 알아보기
+        + Act.1 friends라는 배열을 선언하고 친구 이름을 입력한다.
+            ```
+                const friends = ["dal","mark","lynn","japan guy"]
+            ```
+        + 배열의 이름을 입력하여 결과를 확인해보자
+            ![image](https://user-images.githubusercontent.com/79895970/133918307-1f7decc5-fed4-4dfd-ad1f-f72167a800c2.png)
+        + Act.2 map 함수를 사용해보자
+            + 아래 코드를 입력하고 결과를 확인
+                ```
+                    friends.map(current => { 
+                      console.log(current);
+                      return 0;
+                    })
+                ```
+                    ![image](https://user-images.githubusercontent.com/79895970/133918374-a2c818de-4f60-48d6-bb6b-818253577174.png)
+        + Act.3 map() 함수로 이름에 하트 추가한 배열 만들기.
+            + 아래 코드를 입력하기
+                ```
+                    friends.map(function(friend) { 
+                      return friend + "❤";
+                    })
+                ```
+            + 결과를 확인해보자.
+                ![image](https://user-images.githubusercontent.com/79895970/133918542-15d426ef-7b93-4c49-86e7-fcfd2887d5ef.png)
 ## [ 09월 08일 ]
  > + 리액트로 클론 코딩 시작 하기
 ### 학습내용
