@@ -8,7 +8,7 @@
 ### 학습내용
 0. 상대경로 이미지 삽입 방법
     + public 폴더에 images 폴더 생성
-    + "<img src="images/[이미지이름]">" 형태로 태그를 작성한다.
+    + <pre><code><img src="images/[이미지이름]"></code></pre> 형태로 태그를 작성한다.
 1. 음식 앱에 prop-types 도입하기
     + Act.1 음식 데이터에 rating 추가하기
         + foodLike 배열의 각 요소에 rating(평점)을 추가한다.
