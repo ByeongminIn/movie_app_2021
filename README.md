@@ -1,5 +1,159 @@
 # 인병민 201840225
 
+## [ 09월 29일 ]
+ > + 음식 앱에 prop-types 도입하기
+ > + state로 숫자 증감 기능 만들어 보기
+ > + 숫자 증감 기능을 제대로 만들어 보기
+ > + 클래스형 컴포넌트의 일생 알아보기
+### 학습내용
+0. 상대경로 이미지 삽입 방법
+    + public 폴더에 images 폴더 생성
+    + <img src="images/[이미지이름]"> 형태로 태그를 작성한다.
+1. 음식 앱에 prop-types 도입하기
+    + Act.1 음식 데이터에 rating 추가하기
+        + foodLike 배열의 각 요소에 rating(평점)을 추가한다.
+        + 값의 자료형은 number로 한다.
+    + Act.2 prop-type 설치하기
+        ```
+            npm install prop-types
+        ```
+    + Act.3 정상 설치 여부 확인하기
+        + 설치 확인은 package.json에 가서 dependencies 키에 있는 값을 확인
+    + Act.4 prop-types 적용하기
+        + App.js 파일 맨 위에 import PropTypes from 'prop-types' 추가하기
+    + Act.5 Food.propTypes작성하기
+        ```
+            Food.PropTypes = {
+              name: PropTypes.string.isRequired,
+              picture: PropTypes.string.isRequired,
+              rating: PropTypes.string.isRequired
+            }
+        ```
+    + Act.6 Food.propTypes의 rating 키 값 확인하기
+        + 오류가 나는 이유는 rating의 값을 String으로 지정하였기 때문에
+    + Act.7 prop-types 경고 해결하기
+        + rating의 자료형을 String형에서 number형으로 교체
+    + Act.8 다른 종류의 prop-types 경고 해결하기
+        + picture 이름을 image로 교체하면 오류가 발생하며 이미지가 나오지 않음
+    + Act.9 코드 원래대로 돌려놓기
+    + Act.10 isRequired의 뜻 알아보기
+        + rating props는 필수가 아니어도 되는 항목이다.
+        + 다만 값이 전달되는 경우 자료형이 number이기는 해야 한다.
+2. state로 숫자 증감 기능 만들어 보기
+    + Act.1 클래스형 컴포넌트 작성하기
+    + Act.2 App클래스가 React.Component클래스를 상속 받도록 하자
+        ```
+            import React , {Component} from "react";
+
+            class App extends Component{
+            
+            }
+
+            export default App
+        ```
+    + Act.3 render() 함수를 사용해보자
+        ```
+            render(){
+                return(
+                    <h1>I am a class Component</h1>
+                )
+            }
+        ```
+    + Act.4 state 정의하기
+        + class 안에 state = {} 라고 작성하여 state를 정의한다.
+    + Act.5 state에 count값 추가하고 사용하기
+        ```
+            state = {
+                count: 0
+            }
+        ```
+        ```
+            render(){
+                return(
+                    <h1>The number is: {this.state.count}</h1>
+                )
+            }
+        ```
+    + Act.6 버튼으로 count state값 변경하기
+        + Add버튼과 Minus 버튼 추가하기
+            ```
+                <button>Add</button>
+                <button>Minus</button>
+            ```
+        + add 함수 minus 함수 만들기
+            ```
+                add = () => {
+                    console.log("add");
+                }
+            
+                minus = () => {
+                    console.log("minus");
+                }
+            ```
+        + 버튼에 onclick 이벤트 추가하기
+            ```
+                <button onClick={this.add}>Add</button>
+                <button onClick={this.minus}>Minus</button>
+            ```
+3. 숫자 증감 기능을 제대로 만들어 보기
+    + Act.1 실제 숫자가 증감하도록 함수 수정
+        + console을 지우고 아래 코드로 수정
+            ```
+                this.state.count = 1
+            ```
+        + state를 직접 변경하지 말라는 오류가 발생한다.
+            ```
+                this.setState({count: 1})
+            ```
+        + 버튼을 누르면 단순히 정해둔 숫자로 변하기만 함 => 증감하는 형식으로 코드 변환
+            ```
+                this.setState({count: this.state.count +1})
+            ```
+        + 위와 같은 방법으로도 증감은 하지만 성능에 문제가 생길수 있다.
+            ```
+                this.setState(current => ({count: this.state.count +1}))
+            ```
+        + 화살표 함수를 이용하여 안정적이게 전달할 수 있도록 수정.
+4. 클래스형 컴포넌트의 일생 알아보기
+    + Act.1 constructor() 함수 알아보기
+        + constructor()는 Component를 생성할 때 state 값을 초기화하거나 메서드를 바인딩할 때 사용한다.
+        + React.Component를 상속해서 만들어진 컴포넌트의 생성자를 구현할 때는 super(props)를 선언을 권고하는 이유는 this.props 사용 시 생성자 내에서 정의되지 않아 버그 발생 가능성이 있기 때문입니다.
+        + React에서는 버전17부터 componentWillMount()를 사용하지 않는다.
+            ```
+                constructor(props){
+                super(props)
+                console.log('hello');
+                }
+            ```
+            ```
+                render(){
+                    console.log('render');
+                }
+            ```
+        + 실행후 console을 확인하면 constructor이 먼저 실행된것을 확인할 수 있다.
+    + Act.2 componentDidMount() 함수 알아보기
+            ```
+                componentDidMount() {
+                console.log("componentDidMount");
+                }
+            ```
+        + console을 확인해보면 render()이후에 실행된다.
+    + Act.3 componentDidUpdate() 함수 알아보기
+            ```
+                componentDidUpdate() {
+                console.log("componentDidUpdate");
+                }
+            ```
+        + 실행한것으로 console에 찍히지 않으므로 버튼을 클릭한후 console창을 확인.
+        + setState() => render() => componentDidUpdate() 순서로 실행된다.
+    + Act.4 componentWillUnmount() 함수 알아보기
+            ```
+                componentWillUnmount() {
+                console.log("componentWillUnmount");
+                }
+            ```
+        + 이 함수의 경우는 직접 확인할수 없다. why?
+            + 이 함수는 컴포넌트가 화면에서 떠날 때 실행되기 때문에.
 ## [ 09월 15일 ]
  > + Props
  > + 비슷한 컴포넌트 여러개 만들기
