@@ -1,5 +1,115 @@
 # 인병민 201840225
 
+## [ 10월 06일]
+ > + 영화 앱 만들기 워밍업
+ > + 영화 API사용해 보기
+ > + 영화 데이터 화면에 그리기
+### 학습내용
+1. 영화 앱 만들기 워밍업
+    + Act.1 App 컴포넌트 비우기
+        + 지금까지 사용하던 App.js를 따로 백업해주고 새로운 App.js를 만든다
+    + Act.2 영화 데이터 로딩 상태 표시해주기
+        + state를 선언하고, isLoading키 생성 후 키값을 true로 설정한다.
+            ```
+                class App extends React.Component{
+                    state = {
+                        isLoading: true
+                    }
+                    render(){
+                        const { isLoading } = this.state
+                        return(
+                            <div>
+                                {isLoading ?  'Loading......' : 'We are ready'}
+                            </div>
+                        )
+                    }
+                }
+            ```
+    + Act.3 구조분해할당 + 삼항연산자 = 로딩상태 출력
+        + 구조분해할당으로 this.state에 있는 isLoading을 상수로 선언하여, 앞으로 this.state를 쓰지 않아도되게 한다.
+        + 삼항연산자를 사용해서 isLoading이 true면 'Loading...'을 출력하고,false면 'We are ready'를 출력하게 된다.
+    + Act.4 로딩 현상 구현하기
+        + setTimeout()함수의 첫 번째 인자는 실행할 함수이고, 두 번째 인자로 전달한 값은 지연시간이다. 즉 두 번째 인자 시간만큼 지난 후 첫번째 인자의 함수를 실행한다
+            ```
+                componentDidMount(){
+                setTimeout( () => {this.setState({ isLoading : false})} , 6000)
+                }
+            ```
+        + ComponentDidMount를 사용한 이유는 생명 주기 함수에서 render 다음으로 실행되는 함수이기 때문이다.
+        + 6초 뒤에 'We are ready'가 출력된다
+    + Act.5 영화 데이터를 어디에 저장할까?
+        + state내부에 movies라는 배열을 만들어 로딩된 데이터를 저장한다.
+        + 배열로만드는 이유는 데이터가 여러가지이기 때문이다.
+2. 영화 API 사용해 보기
+    + Act.1 axios 설치하기
+        ```
+            npm install axios
+        ```
+    + Act.2 YTS영화 데이터 API 살펴보기
+        + YTS 사이트에 들어가서 API를 가져오기.
+    + Act.3 영화 목록 데이터 확인해 보기
+        + 아래 주소를 들어가면 JSON 데이터들이 있는것을 확인할 수 있다.
+            ```
+                [https://yts.mx/api/v2/list_movies.json]
+            ```
+    + Act.4 JSON Viewer 확장 도구 설치하기
+        + 위 주소로 그냥 들어가면 min스타일로 제공되어 보기 불편하다.
+        + 확장프로그램 설치후 확인해보기.
+    + Act.5 영화 목록 다시 확인해보기
+    + Act.6 영화 API를 사용하자
+        + 노마드코더 깃허브에서 제공하는 영화 API를 이용해보자.
+    + Act.7 영화 정보 더 자세히 살펴보기
+        + 주소창에 아래 링크를 입력한다
+            ```
+                yts-proxy.now.sh/movie_detail.json
+            ```
+        + 결과는 아무것도 출력되지 않는다. Why?
+            + movie_id라는 조건을 요구하기 때문에
+            + 위 주소를 다음과 같이 수정해서 접속해보자
+                ```
+                    yts-proxy.now.sh/list_movies.json?movie_id=10
+                ```
+            + id가 10인 영화의 자세한 정보를 볼 수 있다.
+    + Act.8 영화 API를 영화 앱에서 호출하기
+        + axios를 import하고 두번째 줄의 코드를 componentDidMount()에 넣어준다.
+            ```
+                import axios from "axios"
+                axios.get('https://yts-proxy.now.sh/list_movies.json')
+            ```
+    + Act.9 axios 동작 확인하기
+        + network탭을 열고 새로고침(ctrl+f5)를 해준다
+    + Act.10 getMovies()함수 기다린 다음, axios.get() 함수가 반환한 데이터 잡기
+    + Act.11 getMovies()에 async 붙이고,axios.get()에 await붙이기
+        + 아래 코드와 같이 수정을 해준다.
+            ```
+                getMovies = () => {
+                    const movies = axios.get('https://yts-proxy.now.sh/list_movies.json')
+                }
+            
+                componentDidMount(){
+                    this.getMovies()
+                }
+            ```
+3. 영화 데이터 화면에 그리기
+    + Act.1 console.log() 함수로 영화 데이터 출력해 보기
+        + getMovies함수 내부에 console.log를 통해 출력해보기.
+    + Act.2 영화 데이터 자세히 살펴보기
+    + Act.3 객체에 있는 movies키에 접근하기
+        + 필요한 정보를 뽑기 위해서 root를 지정해주자
+            ```
+                console.log(movies.data.data.movies)
+            ```
+        + 위 코드와 같이 찍으면 필요한 데이터만 볼수 있다.
+    + Act.4 객체에 있는 movies 키에 조금 더 똑똑하게 접근하기
+        + 구조분해할당 방법을 사용해 객체에 접근해보자
+            ```
+                const {
+                    data: {
+                        data: {movies}
+                    }
+                } = await axios.get('https://yts-proxy.now.sh/list_movies.json')
+            ```
+        + 위 코드와 같이 const를 수정해보고 console.log(movies)를 찍어 결과를 확인해보자.
 ## [ 09월 29일 ]
  > + 음식 앱에 prop-types 도입하기
  > + state로 숫자 증감 기능 만들어 보기
