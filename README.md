@@ -3,6 +3,8 @@
 ## [ 10월 13일]
  > + 영화 데이터 화면에 그리기(Act.6부터)
  > + Movie 컴포넌트 만들기
+ > + 영화 앱 스타일링 하기 - 기초
+ > + 영화 앱 전체 모습 수정하기
 ### 학습내용
 1. 영화 데이터 화면에 그리기
     + Act.6 movies state에 영화 데이터 저장하기
@@ -31,7 +33,7 @@
             ```
                 id: PropTypes.number.isRequired,
                 year: PropTypes.number.isRequired,
-                titlt: PropTypes.string.isRequired,
+                title: PropTypes.string.isRequired,
                 summary: PropTypes.string.isRequired,
                 poster: PropTypes.string.isRequired
             ```
@@ -39,6 +41,91 @@
         + [yts.lt/api#list_movies]사이트에 들어가서 sort_by 항목의 코드를 확인한다
     + Act.5 axios.get() 수정하기
         + App.js에 axios.get 안에 주소를 [https://yts-proxy.now.sh/list_movies.json?sort_by=rating] 로 수정한다.
+    + Act.6 Movie 컴포넌트에서 props를 추가하고 출력해 보기
+        + Movie 컴포넌트에서 id, title, year, summary, poster 를 받아 출력할수 있게 수정한다.
+            ```
+                function Movie({id, title, year,summary,poster})
+            ```
+    + Act.7 App 컴포넌트에서 Movie컴포넌트 그리기
+        + 로딩이 완료되는 자리에 map함수를 사용한다.
+    + Act.8 map() 함수에 컴포넌트를 반환하는 함수 전달하기
+        + console을 찍는 함수를 먼저 만들어본다.
+            ```
+                movies.map((movie) => {
+                    console.log(movie)
+                    return
+                })
+            ```
+    + Act.9 Movie 컴포넌트를 반환하도록 movies.map() 수정하기
+        + App.js에 Movie 컴포넌트를 import후 movies.map()에 <Movie />를 반환하도록 한다
+    + Act.10 Movie컴포넌트에 props 전달하기
+        + map()함수의 return에 아래코드를 적어 props를 전달한다.
+            ```
+                return (<Movie 
+                id = {movie.id}
+                year = {movie.year}
+                title = {movie.title}
+                summary = {movie.summary}
+                poster = {movie.medium_cover_image}
+                />)
+            ```
+    + Act.11 console탭에서 영화 데이터 확인해 보기
+        + 오류는 음식 앱에서 다루었던 내용이다.
+    + Act.12 key props 추가하기
+        + return 위에 key값을 추가한다.
+            ```
+                key = {movie.id}
+            ```
+3. 영화 앱 스타일링 하기 - 기초
+    + Act.1 App컴포넌트에 HTML추가하기
+        + render안의 return에 HTML을 추가하면 아래와 같은 코드로 수정한다.
+            ```
+                <section class="container">
+                    {isLoading ? (
+                        <div class ="loader">
+                         <span class="loader-text">'Loading......' </span></div>
+                    ) : (
+                        <div class="movies">
+                        {movies.map((movie) => (
+                            <Movie 
+                            key = {movie.id}
+                            id = {movie.id}
+                            year = {movie.year}
+                            title = {movie.title}
+                            summary = {movie.summary}
+                            poster = {movie.medium_cover_image}
+                        />
+                        ))}
+                        </div>
+                    )}
+                </section>
+            ```
+    + Act.2 Movie컴포넌트에 HTML추가하기
+        + function Movie내부에 HTML을 추가한다.
+    + Act.3 영화 포스터 이미지 추가하기
+        + Act.2와 같은 방법으로 포스터 이미지를 추가하는 HTML을 작성한다.
+    + Act.4 Movie 컴포넌트 정리하기
+        + id Props가 필요없으니 지워준다
+    + Act.5 style속성으로 title 스타일링하기
+        + h3 tag에 스타일속성으로 바탕을 빨간색으로 지정한다.
+    + Act.6 CSS파일 생성
+        + App.css 와 Movie.css파일을 만든다.
+    + Act.7 App, Movie 컴포넌트에 CSS 파일 import하기
+        + 각각의 파일에 맞는 css를 import 한다
+    + Act.8 App.css파일 작성하기
+        + App.css 에서 body를 어두운색으로 바꿔본다.
+4. 영화 앱 전체 모습 수정하기
+    + Act.1 App.cs 내용 모두 지우기
+    + Act.2 Movie 컴포넌트에 genres props 넘겨주기
+    + Act.3 Movie 컴포넌트 수정하기
+        + Movie 컴포넌트에 genres를 넣는다.
+    + Act.4 App 컴포넌트 수정하기
+        + App.js에 genres를 Movie컴포넌트에 넘길수 있게 수정한다.
+        + 수정후 console을 확인해서 오류가 나오는지 확인해본다.
+    + Act.5 class 속성 이름 className으로 바꿔 주기
+        + class를 className으로 바꿔준다
+        + vscode를 사용하면 ctrl+shift+l 로 전체선택 기능을 이용하면 편하다
+
 ## [ 10월 06일]
  > + 영화 앱 만들기 워밍업
  > + 영화 API사용해 보기
