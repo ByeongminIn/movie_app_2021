@@ -1,5 +1,44 @@
 # 인병민 201840225
 
+## [ 10월 13일]
+ > + 영화 데이터 화면에 그리기(Act.6부터)
+ > + Movie 컴포넌트 만들기
+### 학습내용
+1. 영화 데이터 화면에 그리기
+    + Act.6 movies state에 영화 데이터 저장하기
+        + Act.5에서 console.log부부을 지우고 아래 코드를 입혁해 영화 데이터를 저장한다.
+            ```
+                this.setState({ movies: movies })
+            ```
+        + ES6부터 객체의 키와 변수의 이름이 같다면 코드 축약이 가능하다.
+        + 따라서 코드를 아래와 같이 수정한다
+            ```
+                this.setState({movies})
+            ```
+    + Act.8 isLoading state를 true에서 false로 업데이트하기
+        + 영화 데이터를 모두 다운 받았지만 사용자에게 표시가 되지 않는다
+        + setState에 코드를 수정해 isLoading을 true에서 false로 바꿔주자
+            ```
+             this.setState({movies ,isLoading: false});
+            ```
+2. Movie 컴포넌트 만들기
+    + Act.1 Movie 컴포넌트 만들기
+        + src 폴더에 Movie.js를 만든후 기본 골격을 만들어준다.
+    + Act.2 영화 데이터 다시 살펴보기
+        + yts-proxy.now.sh/list_movies.json에 접속하여 필요한 데이터를 골라 영화 앱에 넣는다.
+    + Act.3 Movie.propTypes 작성하기
+        + PropTypes안에 아래 코드와 같이 작성한다
+            ```
+                id: PropTypes.number.isRequired,
+                year: PropTypes.number.isRequired,
+                titlt: PropTypes.string.isRequired,
+                summary: PropTypes.string.isRequired,
+                poster: PropTypes.string.isRequired
+            ```
+    + Act.4 노마드 코더 영화 API 정렬 기능 사용해 보기
+        + [yts.lt/api#list_movies]사이트에 들어가서 sort_by 항목의 코드를 확인한다
+    + Act.5 axios.get() 수정하기
+        + App.js에 axios.get 안에 주소를 [https://yts-proxy.now.sh/list_movies.json?sort_by=rating] 로 수정한다.
 ## [ 10월 06일]
  > + 영화 앱 만들기 워밍업
  > + 영화 API사용해 보기
