@@ -1,5 +1,87 @@
 # 인병민 201840225
 
+## [ 10월 27일]
+> + 영화 앱 전체 모습 수정하기(Act.6 부터 시작함)
+> + 영화 앱 멋지게 스타일링하기
+> + react-router-dom 설치하고 프로젝트 폴더 정리하기
+> + 라우터 만들어 보기
+### 학습내용
+1. 영화 앱 전체 모습 수정하기
+    + Act.6 영화 장르 출력하기
+        + movie 컴포넌트 내부에 장르가 출력되도록 코드를 수정한다.
+            ```
+                <ul className="movie-genres">
+                {genres.map((genre) => {        <!--장르가 배열이므로 map함수를 이용해 출력-->
+                    return <li className="movie-genre">{genre}</li>
+                })}
+                </ul>
+            ```
+        + console을 확인하면 Key props가 없다는 내용을 확인.
+
+            ![a](https://user-images.githubusercontent.com/79895970/139568226-54bcc5ea-fab7-4d36-8271-8ad83b6beb1c.png)
+    + Act.7 li tag에 key props 추가하기
+        + li tag에 index로 key값을 추가한다.
+2. 영화 앱 멋지게 스타일링하기
+    + Act.1 App.css 수정하기
+    + Act.2 Movie.css 수정하기
+    + Act.3 시놉시스 180자로 제한하기
+        + slice를 이용해 summary부분을 180자로 제한하자
+    + Act.4 영화 앱 제목 살펴보기
+    + Act.5 영화 앱 제목 바꾸기
+        + index.html에 들어가 제목을 Movie App으로 변경하자
+3. react-router-dom 설치하고 프로젝트 폴더 정리하기
+    + Act.1 react-router-dom 설치하기
+        ```
+            npm install react-router-dom
+        ```
+    + Act.2 components 폴더에 Movie 컴포넌트 옮기기
+    + Act.3 routes 폴더에 라우터가 보여줄 화면 만들기
+    + Act.4 Home.js 수정하기
+        + App.js내용을 Home.js로 복사하고 컴포넌트 이름을 Home으로 수정한다.
+        + Home.css를 생성하고 Home.js에 import한다.
+    + Act.5 Home.css 만들기
+        + Home.css는 교재의 내용을 그대로 사용한다.
+    + Act.6 App.js 수정하기
+4. 라우터 만들어 보기
+    + Act.1 HashRouter와 Router컴포넌트
+        ```
+            import { HashRouter, Route } from 'react-router-dom'
+        ```
+    + Act.2 Route 컴포넌트에 path, component props 추가하기
+        ```
+            import About from './routes/About'
+        ```
+    + Act.3 About.js 수정하기
+    + Act.4 라우터 테스트해 보기
+    + Act.5 Home 컴포넌트를 위한 Route컴포넌트 추가하기
+        ```
+            import Home from './routes/Home'
+        ```
+    + Act.6 라우터 테스트하고 문제 찾아보기
+        + 문제점은 Home과 About이 같이 출력함
+    + Act.7 라우터 자세히 살펴보기
+        + App.js를 수정하고 주소를 바꿔 결과값을 확인해보자
+            ```
+                <Route path='/home' component={Home}>
+                    <h1>Home</h1>
+                </Route>
+                <Route path='/home/introduction'>
+                    <h1>Introduction</h1>
+                </Route>                
+                <Route path='/about' component={About}>
+                    <h1>About</h1>
+                </Route>
+            ```
+        + Introduction을 출력할때 Home도 같이 출력함
+        + 순서를 /home/introduction이 아닌 /,/home,/home/introduction 순으로 인식하기 때문
+    + Act.8 App 다시 원래대로 돌리기
+        + 원래대로 돌려놓고 home에는 exact props를 추가한다
+    + Act.9 About.css 작성하기
+        + About.css를 작성 후 About.js에 import 하기
+            ```
+                import './About.css'
+            ```
+
 ## [ 10월 13일]
  > + 영화 데이터 화면에 그리기(Act.6부터)
  > + Movie 컴포넌트 만들기
