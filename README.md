@@ -1,5 +1,87 @@
 # 인병민 201840225
 
+## [ 11월 03일]
+ > + 네비게이션 만들어 보기
+ > + 영화 상세 정보 기능 만들어 보기
+ > + 리다이렉트 기능 만들어 보기
+### 학습내용
+1. 네비게이션 만들어 보기
+    + Act.1 Navigation 컴포넌트 만들기
+        ```
+            function Navigation() {
+                return(
+                    <div>
+                    <a href='/'>Home</a>
+                    <a href='/about'>About</a>
+                    </div>
+                )
+            }
+
+            export default Navigation
+        ```
+    + Act.2 Navigation 컴포넌트 App 컴포넌트에 포함 시키기
+        ```
+            import Navigation from "./components/Navigation"
+        ```
+    + Act.3 Home 링크 눌러 보기
+        + home링크를 눌러보면 react가 죽고 새 페이지가 로딩되는 문제 발견
+    + Act.4 a 태그 Link 컴포넌트로 바꾸기
+        + Link를 react-router-dom으로 import후 a -> Link 로 href -> to 로 수정한다.
+    + Act.5 Navigation 컴포넌트 위치 다시 확인하기
+        + HashRouter안에 Navigator가 있게 배치해준다.
+    + Act.6 Navigation 컴포넌트 스타일링하기
+        + Navigation.css를 만든후 Navigation.js에 import 해준다.
+2. 영화 상세 정보 기능 만들어 보기
+    + Act.1 route props 살펴보기
+        + console.log를 이용해 About으로 어떤 props가 전달되는지 확인한다.
+    + Act.2 route props에 데이터 담아 보내기
+        ```
+            {{ pathname: '/about', state: {fromNavigation:true}}}
+        ```
+    + Act.3 route props 다시 살펴 보기
+    + Act.4 Navigation 컴포넌트 정리하기
+        + 위에서 수정한 코드를 원래대로 돌려놓자.
+    + Act.5 Movie 컴포넌트에 Link 컴포넌트 추가하기
+        + Movie.js에 Link 컴포넌트를 추가한 후 to props를 작성한다.
+    + Act.6 Detail 컴포넌트 만들기
+        + routes 폴더 안에 Detail.js를 만든후 안의 코드를 작성한다.
+    + Act.7 Route 컴포넌트 추가하기
+        + App.js에 Detail.js를 import하고 Detail을 뿌려주도록 코드를 작성한다.
+    + Act.8 영화 카드를 눌러 /movie-detail로 이동한 다음 영화 데이터 확인하기
+        + 영화 카드를 누르면 /movie-detail로 이동이 되고 개발자 모드로 들어가 console을 확인하면 받은값이 들어와있다.
+    + Act.9 /movie-detail로 바로 이동하기
+        + 영화카드가 아닌 주소창으로 들어오면 화면의 hello는 보이나 console값에는 아무것도 나오지 않았다.
+        + console값에 movie-detail의 static값은 undefined로 보인다.
+3. 리다이렉트 기능 만들어 보기
+    + Act.1 History 키 살펴보기
+        + 아무 영화를 클릭하여 이동후 console을 통해 history를 확인
+        + componentDidMount() 생명주기 함수를 사용해 Detail 컴포넌트가 마운트될 때 push()함수를 실행하도록 한다.
+    + Act.2 Detail 컴포넌트 클래스형 컴포넌트로 변경하기
+        + Detail 컴포넌트를 함수형에서 클래스형으로 변경한 후 location, history키를 구조 분해 할당한다.
+            ```
+                class Detail extends React.Component{
+                    componentDidMount() {
+                        const { location,history } = this.props
+                    }
+                    render (){
+                        return(
+                        <span>hello</span>
+                        )
+                    }
+                }
+            ```
+    + Act.3 push() 함수 사용하기
+        + location.state가 undefined인 경우 history.push('/')를 실행하도록 코드를 작성한다.
+    + Act.4 리다이렉트 기능 확인해 보기
+        + home 화면에서 주소창에 /movie-detail를 입력하여 home화면으로 돌아가는지 확인해본다.
+    + Act.5 영화 제목 출력하기
+        + span 내부에 "{ location.state.title }"를 입력하여 영화 제목을 출력한다.
+    + Act.6 /movie-detail로 바로 이동하기
+        + home 화면에서 주소창에 /movie-detail를 입력하면 오류가 발생한다.
+        + componentDidMount() 생명주기 함수를 사용하는데 주소를 통해 이동하면 render함수가 작동하질 못하여 redirect가 작동을 안함.
+        + 따라서 값이 없으면 null값을 return하게 코드를 수정한다.
+    + Act.7 location.state 확인하기
+        + 다시 home화면에서 /movie-detail로 이동해 home으로 이동하는지 확인해보기.
 ## [ 10월 27일]
 > + 영화 앱 전체 모습 수정하기(Act.6 부터 시작함)
 > + 영화 앱 멋지게 스타일링하기
