@@ -2,6 +2,7 @@
 
 ## [ 11월 10일]
 > + 영화 앱 깃허브에 배포하기
+> + react 배우기
 ### 학습내용
 1. 영화 앱 깃허브에 배포하기
     + Act.1 package.json 파일을 열어 homepage 키와 키값을 browserslist 키 아래에 추가한다.
@@ -12,6 +13,38 @@
     + Act.5 ( git remote -v )의 명령어를 입력하여 업로드한 깃허브 저장소의 주소를 확인한다.
     + Act.6 ( npm run deploy )의 명령어를 입력하여 영화 앱을 배포한다.
     + Act.7 URL에 'https://계정.github.io/저장소 이름'을 입력해서 확인한다.
+2. react배우기
+    + React의 특징
+        + 상호작용이 많은 UI개발에 적합하다
+        + 컴포넌트 로직은 JavaScript로 작성한다.
+        + 캡슐화된 컴포넌트로 개발되어 재사용이 용이하다.
+        + DOM과는 별개로 상태를 관리할 수 있다.
+        + 기술 스택의 나머지 부분에는 관여하지 않는다.
+        + 기존 코드와 별개로 개발이 가능하다.
+        + React Native를 이용하면 모바일 앱도 만들 수 있다.
+    + CDN: Content Delivery Network 또는 Content Distribution Network
+    + CORS: 특정 헤더를 통해서 브라우저에게 원 출처(origin) 에서 실행되고 있는 웹 애플리케이션이  다른 출처(cross-origin)에 원하는 리소스에 접근할 수 있는 권한이 있는지 없는지를 알려주는 메커니즘이다
+    + Babel: ECMAScript 2015+ 코드를 이전 JavaScript 엔진에서 실행할 수 있는 이전 버전과  호환되는 JavaScript 버전으로 변환하는 데 주로 사용되는 무료 오픈 소스  JavaScript 트랜스 컴파일러이다.
+    + React 시작해보기
+        + Act.1 index.html 만들기
+            + 새로운 디렉토리를 만들어 새로운 html파일을 만들어본다.
+        + Act.2 CDN 링크 추가하기
+            + index.html의 header부분에 아래 스크립트 코드를 추가하기.
+                ```
+                    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+                    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+                    <script crossorigin src="..."></script>
+                ```
+        + Act.3 JSX 링크 추가하기
+            + 위 링크만 추가하면 작동이 되지 않기 때문에 JSX 스크립트 코드를 추가해준다.
+                ```
+                    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+                ```
+        + Act.4 간단한 컴포넌트 추가하기
+            + React 홈페이지의 Component를 복사하여 헤더에 Script 추가 후  body의 div태그와 id속성을 부여하여 작동해보기
+            + 작동이 안되면 Script에 "type=text/babel"을 추가하기
+        + Act.5 상태를 가지는 컴포넌트 추가
+            + 위와 똑같은 방법으로 Component 복사 후 작동해보기
 ## [ 11월 03일]
  > + 네비게이션 만들어 보기
  > + 영화 상세 정보 기능 만들어 보기
