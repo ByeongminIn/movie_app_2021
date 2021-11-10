@@ -1,5 +1,17 @@
 # 인병민 201840225
 
+## [ 11월 10일]
+> + 영화 앱 깃허브에 배포하기
+### 학습내용
+1. 영화 앱 깃허브에 배포하기
+    + Act.1 package.json 파일을 열어 homepage 키와 키값을 browserslist 키 아래에 추가한다.
+         + 깃 허브 계정과 저장소 이름에 주의 [ https://계정.github.io/저장소 이름 ]
+    + Act.2 package.json 파일에 scripts 키값으로 명령어를 추가한다.
+    + Act.3( git add. / git commit -m "" / git push origin master )의 명령어를 사용하여 깃허브에 업로드
+    + Act.4 ( npm install gh-pages )의 명령어를 사용하여 gh-pages를 설치한다.
+    + Act.5 ( git remote -v )의 명령어를 입력하여 업로드한 깃허브 저장소의 주소를 확인한다.
+    + Act.6 ( npm run deploy )의 명령어를 입력하여 영화 앱을 배포한다.
+    + Act.7 URL에 'https://계정.github.io/저장소 이름'을 입력해서 확인한다.
 ## [ 11월 03일]
  > + 네비게이션 만들어 보기
  > + 영화 상세 정보 기능 만들어 보기
