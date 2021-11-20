@@ -1,4 +1,67 @@
 # 인병민 201840225
+## [ 11월 17일]
+ > + react 배우기(TODO List부터)
+
+ ### 학습내용
+ 1. react 배우기 (TODO List부터)
+    + 1.Todo List
+        + TodoApp과 TodoList 두 개의 컴포넌트로 구성
+        + handleChange는 모든 키보드 입력마다 React의 state를 갱신해서 보여준다. (element에서 확인 가능하다.)
+        + 시간순으로 보면 다음과 같이 동작한다.
+            + 유저입력 > handleChange > React의 state 갱신 > form element가 React의 state를 참조
+        + 유저 입력을 강제로 대문자로 변경할 경우에도 사용한다.
+            ```
+                handleChange(event) {
+                this.setState({value: event.target.value.toUpperCase( )})
+                }
+            ```
+        + handleSubmit은 버튼이 클릭될 때 발생하는 event를 처리한다.
+        + render( )메소드 에서 초기 렌더링을 실행한다.
+        + onChange를 통해 input에 입력되는 값으로 state 상태 변경을 준비한다.
+        + 입력된 값은 state의 "text: '' "에 임시로 저장된다.
+        + lavel의 htmlFor은 input과의 연결을 위한 id값이다.
+            + className처럼 html과 구분하기 위해 JSX에서 사용하는 키워드이다.
+        + 버튼을 클릭하면 버튼의 숫자를 증가시킨다.
+        + 리스트는 배열로 저장되기 때문에 item.length를 통해 list의 수를 확인한다.
+        + input area에 이벤트가 발생하면 handleChange(e)가 동작하여 State의 text값을 변경한다.
+        + “Add #x”버튼을 클릭하면 리스트의 item.length에 1을 더해서 버튼에 출력한다.
+        + 크롬 DevTool을 열어 실시간으로 state가 변화하는 것을 확인한다.
+        + 이제 handleSubmit 메소드에 대해 살펴본다. 제일 중요한 것은 preventDefault 메소드를 사용하는 이유이다.
+    + 2.handleSubmit(e)에서 e.preventDefault() 메소드를 사용하는 이유는?
+        + 브라우저에서 양식을 제출할 때는 기본적으로 브라우저의 새로 고침이 발생하는데,React나 SPA(single page application)의 경우 필요 없는 동작임으로 이를 방지하기위해 사용한다.
+    + 3.TodoList Component
+        + TodoList class를 생성한다.
+        + ul 안에 추가된 task를 li로 출력한다.
+        + 앞서 저장한 id값은 key props로 사용한다.
+        + 마지막으로 ReactDOM으로 렌더링만 하면 끝난다.
+    + 4.혹시 Key props의 역할이 기억나지 않는다면?
+        + key는 props의 안정적으로 사용할 수 있도록 고유성을 부여하기 위해 필요하다.
+        + React가 어떤 props를 변경, 추가 또는 삭제할지 식별하는 것을 도와준다.
+        + 반드시 date를 사용하지 않아도된다. 배열의 index값을 사용해도 된다.
+        + 유일한 값이라면 그 값이 무엇이든 상관없다.
+    + 5.외부 플러그인을 사용하는 컴포넌트
+        + 외부컴포넌트를 사용한 markdown 에디터 이다.
+        + 현재 1~3의 예제를 CDN방법으로 진행했음으로 동일하게 진행한다.
+        + 다만 외부 플러그인은 Remarkable을 사용함으로 CDN으로 링크를 추가한다.
+        + remarkable.js로 검색해야 찾을 수 있다.
+            ```
+            https://github.com/jonschlinkert/remarkable
+            ```
+        + 사이트에서 제공하는 CDN사이트 2곳 중 한 곳에서 링크를 복사해 추가한다.
+        + 공식사이트의 소스코드를 복사해 넣는다.
+        + 테스트 한다.
+        + 하지만 실행이 되지 않는다.
+            + cdn방식으로는 import가 불가능하여 commonjs방식을 이용하여 모듈을 가져와야 하지만 commonjs방식으로는 브라우저에서 모듈을 가져올수 없기 때문에 실행되지 않는다.
+    + 6.creat-react-app으로, Remarkable 사용하기
+        + creat-react-app으로 markdown-editor 프로젝트를 생성한다.
+        + 정상 동작을 확인하다.
+        + App.js에 있는 필요없는 코드를 삭제한다.
+        + App.js에 문서의 코드를 복사해 넣는다.
+        + component의 이름을 App으로 수정한다.
+        + rendering은 index.js에 위임한다.
+        + Remarkable을 설치한다.
+        + React와 Remarkable을 import한다.
+        + 동작이 되는지 확인한다.
 
 ## [ 11월 10일]
 > + 영화 앱 깃허브에 배포하기
