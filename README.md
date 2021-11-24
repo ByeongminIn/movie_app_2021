@@ -83,11 +83,11 @@
         + [컴포넌트 추출](https://ko.reactjs.org/docs/components-and-props.html#extracting-components)
     + Act.5 [State와 생명주기](https://ko.reactjs.org/docs/state-and-lifecycle.html)
         + [함수에서 클래스로 변환하기](https://ko.reactjs.org/docs/state-and-lifecycle.html#converting-a-function-to-a-class)
-            1.React.Component를 확장하는 동일한 이름의 ES6 class를 생성합니다.
-            2.render()라고 불리는 빈 메서드를 추가합니다.
-            3.함수의 내용을 render() 메서드 안으로 옮깁니다.
-            4.render() 내용 안에 있는 props를 this.props로 변경합니다.
-            5.남아있는 빈 함수 선언을 삭제합니다.
+            1. React.Component를 확장하는 동일한 이름의 ES6 class를 생성합니다.
+            2. render()라고 불리는 빈 메서드를 추가합니다.
+            3. 함수의 내용을 render() 메서드 안으로 옮깁니다.
+            4. render() 내용 안에 있는 props를 this.props로 변경합니다.
+            5. 남아있는 빈 함수 선언을 삭제합니다.
                 ```
                     class Clock extends React.Component {
                       render() {
