@@ -1,4 +1,127 @@
 # 인병민 201840225
+
+## [ 11월 24일]
+ > + React 시작하기
+ > + React의 주요 개념
+
+### 학습내용
+1. [React 시작하기](https://ko.reactjs.org/docs/getting-started.html#learn-react)
+    + Act.1 React 시도해보기
+        + React는 처음부터 점진적으로 적용할 수 있도록 설계되었으며 **필요한 만큼 React를 사용할 수 있습니다.**
+        + React의 간단한것은 온라인 코드 편집기 이용으로도 충분합니다.
+        + 자신의 HTML페이지에 추가하고 싶으면 처음에는 CDN링크를 이용하여 간단한 기능을 추가하는것도 추천합니다.
+    + Act.2 React 배우기
+        + React 홈페이지에는 직접 구현하면서 학습하는 **실용적인 자습서**와 개념을 단계적으로 익히는 **주요 개념 가이드**로 이루어져 있습니다.
+        + 만약 React의 문서가 어렵게 느껴진다면 Tania Rasica가 쓴 [React의 개요](https://www.taniarascia.com/getting-started-with-react/)를 먼저 보고 오시는 것을 추천합니다.
+        + 주요 개념이 익숙해졌고 다음 단계의 React를 학습하려는 사람들에게는 일반적으로 사용되지 않는 React 기능을 다루는 **고급 개념**과 **API 참조**를 보시면 됩니다.
+        + 트위터의 reactjs 계정을 보시면 최신 React 소식을 접할수 있습니다.
+        + 혹시 문서가 이상하다고 생각이 들면 공식 계정으로 트윗을 하여 개선단계에 참여할수 있습니다.
+2. [React의 주요 개념](https://ko.reactjs.org/docs/hello-world.html)
+    + Act.1 [Hello World](https://ko.reactjs.org/docs/hello-world.html)
+        + 가장 단순한 React 예시입니다.
+            ```
+                ReactDOM.render(
+                  <h1>Hello, world!</h1>,
+                  document.getElementById('root')
+                );
+            ```
+        + 이 코드는 "Hello, world!"라는 제목을 보여줍니다.
+        + React는 JavaScript 라이브러리이며, 따라서 JavaScript 언어에 대한 기본적인 이해가 필요합니다.
+        + 자신이 없다면 [JavaScript 튜토리얼 살펴보기](https://developer.mozilla.org/ko/docs/Web/JavaScript/A_re-introduction_to_JavaScript)를 통해 자신이 어느정도 수준인지 파악 후 들어가길 권장합니다.
+    + Act.2 [JSX 소개](https://ko.reactjs.org/docs/introducing-jsx.html)
+        + JSX란 JavaScript를 확장한 문법입니다, JSX의 간단한 코드를 예시로 어떤 형태롤 가지는지 알고 가는것이 좋습니다.
+            ```
+                const element = <h1>Hello, world!</h1>;
+            ```
+        + [JSX에 표현식 포함하기](https://ko.reactjs.org/docs/introducing-jsx.html#embedding-expressions-in-jsx)
+        + [JSX도 표현식입니다.](https://ko.reactjs.org/docs/introducing-jsx.html#jsx-is-an-expression-too)
+            + JSX도 JavaScript기반이기 때문에 JavaScript 객체로 인식하여 if구문 및 for loop안에 사용이 가능합니다.
+        + [JSX 속성 정의](https://ko.reactjs.org/docs/introducing-jsx.html#specifying-attributes-with-jsx)
+            + Attribute에 따옴표를 이용해 문자열 리터럴을 정의할 수 있습니다.
+            + 중괄호를 사용하여 Attribute에 JavaScript 표현식을 삽입할 수도 있습니다.
+            + 이 두 방법은 동일한 Attribute에 동시에 사용하면 안됩니다.
+        + [JSX로 자식 정의](https://ko.reactjs.org/docs/introducing-jsx.html#specifying-attributes-with-jsx)
+            + 태그가 비어있다면 XML처럼 />를 이용해 닫아주어야 합니다.
+        + [JSX는 객체를 표현합니다.](https://ko.reactjs.org/docs/introducing-jsx.html#specifying-attributes-with-jsx)
+             + Babel은 JSX를 React.createElement() 호출로 컴파일합니다.
+    + Act.3 [DOM에 엘리먼트 렌더링하기](https://ko.reactjs.org/docs/rendering-elements.html#rendering-an-element-into-the-dom)
+        + React 엘리먼트를 DOM 노드에 렌더링하려면 둘 다 ReactDOM.render()로 전달하면 됩니다.
+            ```
+                const element = <h1>Hello, world</h1>;
+                ReactDOM.render(element, document.getElementById('root'));
+            ```
+        + 마찬가지로 엘리먼트의 업데이트도 새 엘리먼트를 생성 후 ReactDOM.render()로 전달하는 것입니다.
+    + Act.4 [Components와 Props](https://ko.reactjs.org/docs/components-and-props.html)
+        + 컴포넌트는 함수 컴포넌트와 클래스 컴포넌트가 있다.
+        + 컴포넌트를 정의하는 가장 간단한 방법은 JavaScript 함수를 작성하는 것입니다.
+        + 컴포넌트의 이름은 항상 대문자로 시작합니다.
+            + React는 소문자로 시작하는 컴포넌트를 DOM태그로 처리하기 때문이다.
+        + [컴포넌트 합성](https://ko.reactjs.org/docs/components-and-props.html#composing-components)
+            + 컴포넌트는 자신의 출력에 다른 컴포넌트를 참조할 수 있습니다.
+            + 예를 들어 Welcome을 여러번 렌더링하는 App 컴포넌트를 만들 수 있습니다.
+                ```
+                    function Welcome(props) {
+                      return <h1>Hello, {props.name}</h1>;
+                    }
+
+                    function App() {
+                      return (
+                        <div>
+                          <Welcome name="Sara" />
+                          <Welcome name="Cahal" />
+                          <Welcome name="Edite" />
+                        </div>
+                      );
+                    }
+
+                    ReactDOM.render(
+                      <App />,
+                      document.getElementById('root')
+                    );
+                ```
+            + 코드 실행은 [Codepen](https://codepen.io/pen?&editors=0010)에서도 가능하다.
+        + [컴포넌트 추출](https://ko.reactjs.org/docs/components-and-props.html#extracting-components)
+    + Act.5 [State와 생명주기](https://ko.reactjs.org/docs/state-and-lifecycle.html)
+        + [함수에서 클래스로 변환하기](https://ko.reactjs.org/docs/state-and-lifecycle.html#converting-a-function-to-a-class)
+            1.React.Component를 확장하는 동일한 이름의 ES6 class를 생성합니다.
+            2.render()라고 불리는 빈 메서드를 추가합니다.
+            3.함수의 내용을 render() 메서드 안으로 옮깁니다.
+            4.render() 내용 안에 있는 props를 this.props로 변경합니다.
+            5.남아있는 빈 함수 선언을 삭제합니다.
+                ```
+                    class Clock extends React.Component {
+                      render() {
+                        return (
+                          <div>
+                            <h1>Hello, world!</h1>
+                            <h2>It is {this.props.date.toLocaleTimeString()}.</h2>
+                          </div>
+                        );
+                      }
+                    }
+                ```
+        + [클래스에 로컬 State 추가하기](https://ko.reactjs.org/docs/state-and-lifecycle.html#adding-local-state-to-a-class)
+            1. **render()** 메서드 안에 있는 **this.props.date**를 **this.state.date**로 변경합니다.
+                ```
+                    <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+                ```
+            2. 초기 **this.state**를 지정하는 class **constructor**를 추가합니다.
+                ```
+                  constructor(props) {
+                      super(props);
+                      this.state = {date: new Date()};
+                    }
+                ```
+                + 클래스 컴포넌트는 항상 props로 기본 constructor를 호출해야 합니다.
+            3. <Clock /> 요소에서 date prop을 삭제합니다.
+                ```
+                    ReactDOM.render(
+                      <Clock />,
+                      document.getElementById('root')
+                    );
+                ```
+            + 완성된것은 [Codepen](https://codepen.io/gaearon/pen/KgQpJd?editors=0010)에서 확인 가능하다.
+            + 함수에서 클래스로 변환, 클래스에서 로컬 state를 추가한 코드를 비교해가며 변화한것을 공부하면 좋을것 같다.
 ## [ 11월 17일]
  > + react 배우기(TODO List부터)
 
