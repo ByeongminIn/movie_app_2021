@@ -6,27 +6,26 @@
  > + 조건부 렌더링
 ### 학습내용
 #### State와 생명주기
-
-    1. 생명주기 메서드를 클래스에 추가하기
-        + Clock이 처음 DOM에 렌더링 될 때 마다 타이머를 설정하려고 합니다.이것은 React에서 "마운팅"이라고 합니다
-        + Clock에 의해 생성된DOM이  삭제될 때 마다 타이머를 해제하려고 합니다.이것은 React에서 "언마운팅"이라고 합니다
-        + 컴포넌트 클래스에서 특별한 메서드를 선언하여 컴포넌트가 마운트되거나 언마운트 될 때 일부 코드를 작동할 수 있습니다.
-        + ComponenetDidMount() 메서드는 컴포넌트 출력물이 DOM에 렌더링 된 후에 실행
-            ```
-                componentDidMount() {
-                  this.timerID = setInterval(
-                    () => this.tick(),
-                    1000
-                  );
-                }
-            ```
-        + componentWillUnmount() 생명주기 메서드 안에 있는 타이머를 분해해 보겠습니다.
-            ```
-                componentWillUnmount() {
-                  clearInterval(this.timerID);
-                }
-            ```
-        + 위와 같은 특별한 메서드를 "생명주기 메서드" 라고 부릅니다.
+1. 생명주기 메서드를 클래스에 추가하기
+    + Clock이 처음 DOM에 렌더링 될 때 마다 타이머를 설정하려고 합니다.이것은 React에서 "마운팅"이라고 합니다
+    + Clock에 의해 생성된DOM이  삭제될 때 마다 타이머를 해제하려고 합니다.이것은 React에서 "언마운팅"이라고 합니다
+    + 컴포넌트 클래스에서 특별한 메서드를 선언하여 컴포넌트가 마운트되거나 언마운트 될 때 일부 코드를 작동할 수 있습니다.
+    + ComponenetDidMount() 메서드는 컴포넌트 출력물이 DOM에 렌더링 된 후에 실행
+        ```
+            componentDidMount() {
+              this.timerID = setInterval(
+                () => this.tick(),
+                1000
+              );
+            }
+        ```
+    + componentWillUnmount() 생명주기 메서드 안에 있는 타이머를 분해해 보겠습니다.
+        ```
+            componentWillUnmount() {
+              clearInterval(this.timerID);
+            }
+        ```
+    + 위와 같은 특별한 메서드를 **"생명주기 메서드"** 라고 부릅니다.
 ## [ 11월 24일]
  > + React 시작하기
  > + React의 주요 개념
