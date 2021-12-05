@@ -26,6 +26,83 @@
             }
         ```
     + 위와 같은 특별한 메서드를 **"생명주기 메서드"** 라고 부릅니다.
+    + Clock의 메서드 호출 순서 요약.
+        + <Clock />가 ReactDOM.render()로 전달되었을 때 React는 Clock 컴포넌트의 constructor를 호출 후 this.state를 초기화합니다.
+        + React는 Clock 컴포넌트의 render() 메서드를 호출합니다. 그 다음 React는 Clock의 렌더링 출력값을 일치시키기 위해 DOM을 업데이트합니다.
+        + Clock 출력값이 DOM에 삽입되면, React는 componentDidMount() 생명주기 메서드를 호출합니다. 그 안에서 Clock 컴포넌트는 매초 컴포넌트의 tick() 메서드를 호출하기 위한 타이머를 설정하도록 브라우저에 요청합니다.
+        + 매초 브라우저가 tick() 메서드를 호출합니다. setState() 호출로 React는 state가 변경된 것을 인지하고 render() 메서드를 다시 호출합니다. React는 이에 따라 DOM을 업데이트합니다.
+        + Clock 컴포넌트가 DOM으로부터 한 번이라도 삭제된 적이 있다면 React는 타이머를 멈추기 위해 componentWillUnmount() 생명주기 메서드를 호출합니다.
+2. State를 올바르게 사용하기
+    + 직접 State를 수정하지 마세요
+        + this.state는 모두 렌덩링된 값을 나타내기 때문에 컴포넌트를 다시 렌더링하지 않습니다.
+        + setState()를 이용하여 값을 변경하는것이 좋다.
+    + State 업데이트는 비동기적일 수도 있습니다.
+        + React는 성능을 위해 여러 setState() 호출을 단일 업데이트로 한꺼번에 처리할 수 있습니다.
+        + 하지만 this.props와 this.state가 비동기적으로 업데이트될 수 있기 때문에 다음 state를 계산할 때 해당 값에 의존해서는 안 됩니다.
+        + 이럴때는 객체보다 함수를 인자로 사용하는 setState()를 사용하면 됩니다.
+    + State 업데이트는 병합됩니다
+        + setState()를 호출할 때 React는 제공한 객체를 현재 state로 병합합니다.
+        + 병합은 얕게 이루어지기 때문에 this.setState({comments})는 this.state.posts에 영향을 주진 않지만 this.state.comments는 완전히 대체됩니다.
+3. 데이터는 아래로 흐릅니다.
+    + 부모 컴포넌트나 자식 컴포넌트 모두 특정 컴포넌트가 유상태인지 또는 무상태인지 알 수 없어 state는 종종 로컬 또는 캡슐화라고 불립니다.
+    + 컴포넌트는 자신의 state를 자식 컴포넌트에 props로 전달할 수 있습니다.
+        ```
+            <FormattedDate date={this.state.date} />
+        ```
+    + FormattedDate 컴포넌트는 date를 자신의 props로 받을 것이고 이것이 Clock의 state로부터 왔는지, Clock의 props에서 왔는지, 수동으로 입력한 것인지 알지 못합니다.
+        ```
+            function FormattedDate(props) {
+              return <h2>It is {props.date.toLocaleTimeString()}.</h2>;
+            } 
+        ```
+    + 일반적으로 이를 “하향식(top-down)” 또는 “단방향식” 데이터 흐름이라고 합니다.
+    + **React 앱에서 컴포넌트가 유상태 또는 무상태에 대한 것은 시간이 지남에 따라 변경될 수 있는 구현 세부 사항으로 간주합니다.**
+    + **유상태 컴포넌트 안에서 무상태 컴포넌트를 사용할 수 있으며, 그 반대 경우도 마찬가지로 사용할 수 있습니다.**
+#### 이벤트 처리하기
+1. React 엘리먼트에서 이벤트를 처리하는 방식은 DOM 엘리먼트에서 이벤트를 처리하는 방식과 매우 유사합니다. 몇 가지 문법 차이는 다음과 같습니다.
+    + React의 이벤트는 소문자 대신 캐멀 케이스(camelCase)를 사용합니다.
+    + JSX를 사용하여 문자열이 아닌 함수로 이벤트 핸들러를 전달합니다.
+    + React에서는 false를 반환해도 기본 동작을 방지할 수 없기 때문에, 반드시 preventDefault를 명시적으로 호출해야 합니다.
+    + React를 사용할 때 DOM 엘리먼트가 생성된 후 리스너를 추가하기 위해 addEventListener를 호출할 필요가 없습니다. 대신, 엘리먼트가 처음 렌더링될 때 리스너를 제공하면 됩니다.
+2. 이벤트 핸들러에 인자 전달하기
+    + 루프 내부에서는 이벤트 핸들러에 추가적인 매개변수를 전달하는 것이 일반적입니다. 예를 들어, id가 행의 ID일 경우 다음 코드가 모두 작동합니다.
+        ```
+            <button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>
+            <button onClick={this.deleteRow.bind(this, id)}>Delete Row</button>
+        ```
+    + 위 두 줄은 동등하며 각각 화살표 함수와 Function.prototype.bind를 사용합니다.
+    + 화살표 함수를 사용하면 명시적으로 인자를 전달해야 하지만 bind를 사용할 경우 추가 인자가 자동으로 전달됩니다.
+#### 조건부 렌더링
+1. React에서는 원하는 동작을 캡슐화하는 컴포넌트를 만들 수 있습니다. 이렇게 하면 애플리케이션의 상태에 따라서 컴포넌트 중 몇 개만을 렌더링할 수 있습니다.
+    + React에서 조건부 렌더링은 JavaScript에서의 조건 처리와 같이 동작합니다.
+    + if 나 조건부 연산자 와 같은 JavaScript 연산자를 현재 상태를 나타내는 엘리먼트를 만드는 데에 사용하세요.
+    + 그러면 React는 현재 상태에 맞게 UI를 업데이트할 것입니다.
+    + [예시](https://codepen.io/gaearon/pen/ZpVxNq?editors=0011)
+2. 엘리먼트 변수
+    + 엘리먼트를 저장하기 위해 변수를 사용할 수 있습니다. 출력의 다른 부분은 변하지 않은 채로 컴포넌트의 일부를 조건부로 렌더링 할 수 있습니다.
+    + [예시](https://codepen.io/gaearon/pen/QKzAgB?editors=0010)
+    + 변수를 선언하고 if를 사용해서 조건부로 렌더링 하는 것은 좋은 방법이지만 더 짧은 구문을 사용하고 싶을 때가 있을 수 있습니다.
+    + 여러 조건을 JSX 안에서 인라인(inline)으로 처리할 방법 몇 가지를 아래에서 소개하겠습니다.
+3. 논리 && 연산자로 If를 인라인으로 표현하기
+    + JSX 안에는 중괄호를 이용해서 표현식을 포함 할 수 있습니다. 그 안에 JavaScript의 논리 연산자 &&를 사용하면 쉽게 엘리먼트를 조건부로 넣을 수 있습니다.
+    + [예시](https://codepen.io/gaearon/pen/ozJddz?editors=0010)
+    + JavaScript에서 true && expression은 항상 expression으로 평가되고 false && expression은 항상 false로 평가됩니다.
+    + 따라서 && 뒤의 엘리먼트는 조건이 true일때 출력이 됩니다. 조건이 false라면 React는 무시하고 건너뜁니다.
+4. 조건부 연산자로 If-Else구문 인라인으로 표현하기
+    + 엘리먼트를 조건부로 렌더링하는 다른 방법은 조건부 연산자인 condition ? true: false를 사용하는 것입니다.
+        ```
+            render() {
+          const isLoggedIn = this.state.isLoggedIn;
+          return (
+            <div>
+              The user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.
+            </div>
+          );
+        }
+        ```
+5. 컴포넌트가 렌더링하는 것을 막기
+    + 가끔 다른 컴포넌트에 의해 렌더링될 때 컴포넌트 자체를 숨기고 싶을 때가 있을 수 있습니다. 이때는 렌더링 결과를 출력하는 대신 null을 반환하면 해결할 수 있습니다.
+    + [예시](https://codepen.io/gaearon/pen/Xjoqwm?editors=0010)
 ## [ 11월 24일]
  > + React 시작하기
  > + React의 주요 개념
